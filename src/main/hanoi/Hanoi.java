@@ -15,7 +15,6 @@ public class Hanoi {
 			moveDisks(origin, destiny);
 			return;
 		}
-		moveDisks(origin, auxiliary);
 		hanoiTower(n - 1, origin, destiny, auxiliary);
 		moveDisks(origin, destiny);
 		hanoiTower(n - 1, auxiliary, origin, destiny);
