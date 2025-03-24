@@ -5,17 +5,18 @@ import main.hanoi.*;
 public class App {
 	public static void main(String[] args) {
 		
-		Tower<Disk> origin = new Tower<Disk>('A');
-		//origin.add(new Disk(5));
-		//origin.add(new Disk(4));
-		//origin.add(new Disk(3));
-		origin.add(new Disk(2));
-		origin.add(new Disk(1));
+		// Tower<Disk> origin = new Tower<Disk>('A');
+		// //origin.add(new Disk(5));
+		// //origin.add(new Disk(4));
+		// //origin.add(new Disk(3));
+		// origin.add(new Disk(2));
+		// origin.add(new Disk(1));
 		
-		Tower<Disk> auxiliary = new Tower<Disk>('B');
-		Tower<Disk> destiny = new Tower<Disk>('C');
+		// Tower<Disk> auxiliary = new Tower<Disk>('B');
+		// Tower<Disk> destiny = new Tower<Disk>('C');
 		
-		Hanoi.hanoiTower(origin.length(), origin, auxiliary, destiny);
+		// Hanoi.hanoiTower(origin.length(), origin, auxiliary, destiny);
+		Hanoi.hanoi(3, 'A', 'B', 'C');
 		System.out.println("Acabou");
 		 
 	}

@@ -11,12 +11,14 @@ public class Hanoi {
 		hanoi(n - 1, auxiliary, origin, destiny);
 	}
 	public static void hanoiTower(int n, Tower<Disk> origin, Tower<Disk> auxiliary, Tower<Disk> destiny) {
-		if(n > 0) {
-			hanoiTower(n - 1, origin, auxiliary, destiny);
+		if(n == 1) {
 			moveDisks(origin, destiny);
-			hanoiTower(n - 1, auxiliary, destiny, origin);
+			return;
 		}
-		
+		moveDisks(origin, auxiliary);
+		hanoiTower(n - 1, origin, destiny, auxiliary);
+		moveDisks(origin, destiny);
+		hanoiTower(n - 1, auxiliary, origin, destiny);
 		
 	}
 	private static boolean isBigger(Tower<Disk> origin, Tower<Disk> destiny) {
