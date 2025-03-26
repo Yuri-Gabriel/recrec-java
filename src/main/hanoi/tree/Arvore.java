@@ -11,26 +11,28 @@ public class Arvore<T> {
 
     public boolean exist(T value) {
 
-        if(this.current_node.value != null) {
-            if (this.current_node.value.equals(value)) {
-                this.current_node = this.root;
-                return true;
+        if(current_node != null) {
+            if(this.current_node.value != null) {
+                if (this.current_node.value.equals(value)) {
+                    this.current_node = this.root;
+                    return true;
+                }
+                if(this.current_node.left == null && this.current_node.right == null) {
+                    this.current_node = this.root;
+                    return false;
+                };
+    
+                int value_num_bytes = value.toString().getBytes().length;
+                int current_num_bytes = this.current_node.value.toString().getBytes().length;
+    
+                if(current_num_bytes < value_num_bytes) {
+                    this.current_node = this.current_node.left;
+                } else {
+                    this.current_node = this.current_node.right; 
+                }
+    
+                return exist(value);
             }
-            if(this.current_node.left == null && this.current_node.right == null) {
-                this.current_node = this.root;
-                return false;
-            };
-
-            int value_num_bytes = value.toString().getBytes().length;
-            int current_num_bytes = this.current_node.value.toString().getBytes().length;
-
-            if(current_num_bytes < value_num_bytes) {
-                this.current_node = this.current_node.left;
-            } else {
-                this.current_node = this.current_node.right; 
-            }
-
-            return exist(value);
         }
         this.current_node = this.root;
         return false;
@@ -83,8 +85,19 @@ public class Arvore<T> {
             }
         }
         
-        Node<T> pseudoRoot = getNode(value).right;        
-        removeFromPseudoRoot(pseudoRoot, pseudoRoot.left);
+        Node<T> pseudoRoot = getNode(value).right;
+        if(pseudoRoot != null) {
+            if(pseudoRoot.left != null) {
+                removeFromPseudoRoot(pseudoRoot, pseudoRoot.left);
+            } else {
+                pseudoRoot.prev.value = pseudoRoot.value;
+                pseudoRoot.prev.right = pseudoRoot.left;
+            } 
+        } else {
+            getNode(value).prev.right = null;
+        }
+           
+        this.current_node = this.root;
     }
 
     private void removeFromPseudoRoot(Node<T> pseudoRoot, Node<T> current) {
@@ -93,20 +106,17 @@ public class Arvore<T> {
             removeFromPseudoRoot(pseudoRoot, current);
         } else {
             pseudoRoot.prev.value = current.value;
-            current.prev.left = current.right;
-            
+            current.prev.right = current.left;
         }
     }
 
     private Node<T> getNode(T value) {
-        int value_num_bytes = value.toString().getBytes().length;
-        int current_num_bytes = this.current_node.value.toString().getBytes().length;
-
-        if(this.current_node.value.equals(value)) {
-            return this.current_node;
-        }
+        if(this.current_node.value.equals(value)) return this.current_node;
 
         if(this.current_node.left == null && this.current_node.right == null) return null;
+
+        int value_num_bytes = value.toString().getBytes().length;
+        int current_num_bytes = this.current_node.value.toString().getBytes().length;
 
         if(current_num_bytes < value_num_bytes) {
             this.current_node = this.current_node.left;

@@ -16,11 +16,11 @@ public class App {
 		
 		System.out.println("foi");
 
-		System.out.println(tree.exist("nao sei mais"));
+		System.out.println(tree.exist("ping pong"));
 
-		tree.remove("nao sei mais");
+		tree.remove("ping pong");
 
-		System.out.println(tree.exist("nao sei mais"));
+		System.out.println(tree.exist("cabeleleira leila"));
 		System.out.println("jahgs");
 		// Tower<Disk> origin = new Tower<Disk>('A');
 		// //origin.add(new Disk(5));
