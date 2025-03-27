@@ -126,5 +126,23 @@ public class Arvore<T> {
             return getNode(value);
         }
     }
+
+    public void update(T oldValue, T newValue) {
+        Node<T> node_to_update = getNode(oldValue);
+        if(node_to_update == null) return;
+
+        int newValue_num_bytes = getNumBytes(newValue);
+        if(node_to_update.prev.right == node_to_update) {
+            if(newValue_num_bytes < getNumBytes(node_to_update.prev.value)) {
+                
+            }
+        } else {
+
+        }
+    }
+
+    private int getNumBytes(T value) {
+        return value.toString().getBytes().length;
+    }
     
 }
