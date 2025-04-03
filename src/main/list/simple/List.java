@@ -1,4 +1,4 @@
-package main;
+package main.list.simple;
 
 public class List<T> {
 	private NodeList<T> head;

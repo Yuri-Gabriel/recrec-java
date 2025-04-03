@@ -1,6 +1,8 @@
  package main;
 
-import main.hanoi.tree.*;
+import main.others.Musica;
+import main.others.Player;
+import main.tree.*;
 
 public class App {
 	public static void main(String[] args) {

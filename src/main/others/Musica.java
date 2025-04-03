@@ -1,4 +1,4 @@
-package main;
+package main.others;
 
 public class Musica {
     int id;

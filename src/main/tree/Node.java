@@ -1,4 +1,4 @@
-package main.hanoi.tree;
+package main.tree;
 
 public class Node<T> {
     public T value;

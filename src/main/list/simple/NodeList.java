@@ -1,4 +1,4 @@
-package main;
+package main.list.simple;
 
 public class NodeList<T> {
     private T value;

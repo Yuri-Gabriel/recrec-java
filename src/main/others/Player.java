@@ -1,4 +1,6 @@
-package main;
+package main.others;
+
+import main.list.simple.List;
 
 public class Player {
     private List<Musica> list;
