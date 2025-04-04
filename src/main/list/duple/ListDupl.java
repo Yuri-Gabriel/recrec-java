@@ -31,23 +31,16 @@ public class ListDupl<T> {
 		}
 	}
 	
-	public void remove() {
-		if(this.head != null) {
-			if(this.head.getNext() == null) {
-				this.head = null;
-				this.end = null;
-			} else if(this.head.getNext() == this.end){
-				this.end = this.head;
-				this.head.setNext(null);
-			} else {
-				while(this.haveNext()) {
-					if(this.current.getNext().getNext() == null) {
-						this.current.setNext(null);
-                        this.end = this.current;
-					}
-				}
-			}
-		}
+	public void removeLeft() {
+		
+	}
+
+	public void removeRight() {
+		
+	}
+
+	private boolean haveValue() {
+		return this.head != null;
 	}
 
 	public NodeDupl<T> getCurrent() {
