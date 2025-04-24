@@ -22,10 +22,10 @@ public class Arvore<T> {
                     return false;
                 };
     
-                int value_num_bytes = value.toString().getBytes().length;
-                int current_num_bytes = this.current_node.value.toString().getBytes().length;
+                int valueSumBytes = getSumBytes(getObjectAddress(value).getBytes());
+                int currentNumSumBytes = getSumBytes(getObjectAddress(this.current_node).getBytes());
     
-                if(current_num_bytes < value_num_bytes) {
+                if(currentNumSumBytes < valueSumBytes) {
                     this.current_node = this.current_node.left;
                 } else {
                     this.current_node = this.current_node.right; 
@@ -47,11 +47,11 @@ public class Arvore<T> {
 
         if(this.current_node == null) this.current_node = this.root;
 
-        int value_num_bytes = value.toString().getBytes().length;
-        int current_num_bytes = this.current_node.value.toString().getBytes().length;
+        int valueSumBytes = getSumBytes(getObjectAddress(value).getBytes());
+        int currentNumSumBytes = getSumBytes(getObjectAddress(this.current_node).getBytes());
 
 
-        if(current_num_bytes < value_num_bytes) {
+        if(currentNumSumBytes < valueSumBytes) {
             if(this.current_node.left == null) {
                 newNode.prev = this.current_node;
                 this.current_node.left = newNode;
@@ -115,10 +115,10 @@ public class Arvore<T> {
 
         if(this.current_node.left == null && this.current_node.right == null) return null;
 
-        int value_num_bytes = value.toString().getBytes().length;
-        int current_num_bytes = this.current_node.value.toString().getBytes().length;
+        int valueSumBytes = getSumBytes(getObjectAddress(value).getBytes());
+        int currentNumSumBytes = getSumBytes(getObjectAddress(this.current_node).getBytes());
 
-        if(current_num_bytes < value_num_bytes) {
+        if(currentNumSumBytes < valueSumBytes) {
             this.current_node = this.current_node.left;
             return getNode(value);
         } else {
@@ -128,21 +128,20 @@ public class Arvore<T> {
     }
 
     public void update(T oldValue, T newValue) {
-        Node<T> node_to_update = getNode(oldValue);
-        if(node_to_update == null) return;
-
-        int newValue_num_bytes = getNumBytes(newValue);
-        if(node_to_update.prev.right == node_to_update) {
-            if(newValue_num_bytes < getNumBytes(node_to_update.prev.value)) {
-                
-            }
-        } else {
-
-        }
+        
     }
 
-    private int getNumBytes(T value) {
-        return value.toString().getBytes().length;
-    }
+    private static <T extends Object> String getObjectAddress(T obj) {
+		String objectAddress = obj.toString().substring(obj.toString().lastIndexOf("@") + 1);
+		return objectAddress;
+	}
+
+	private static int getSumBytes(byte[] bytes) {
+		int sum = 0;
+		for(byte b : bytes) {
+			sum += b;
+		}
+		return sum;
+	}
     
 }

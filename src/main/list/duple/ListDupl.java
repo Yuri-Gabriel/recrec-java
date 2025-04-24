@@ -31,7 +31,35 @@ public class ListDupl<T> {
 		}
 	}
 
+	
+
+	public void addInTheBorder(T value1, T value2) {
+		NodeDupl<T> new_node_left = new NodeDupl<T>();
+		new_node_left.setValue(value1);
+		NodeDupl<T> new_node_right = new NodeDupl<T>();
+		new_node_right.setValue(value2);
+
+		if(this.head == null && this.end == null) {
+			this.head = new_node_left;
+			this.end = new_node_right;
+
+			this.head.setNext(this.end);
+			this.end.setPrev(this.head);
+		} else {
+			new_node_left.setNext(this.head);
+			this.head.setPrev(new_node_left);
+			this.head = new_node_left;
+			
+			new_node_right.setPrev(this.end);
+			this.end.setNext(new_node_right);
+			this.end = new_node_right;
+		}
+	}
+
     public void showRightToLeft() {
+		if(this.end == null) return;
+
+		this.current = null;
         while(this.havePrev()) {
             System.out.print(" <- " + this.current.getValue().toString());
         }
@@ -39,13 +67,18 @@ public class ListDupl<T> {
     }
 
     public void showLeftToRight() {
+		if(this.head == null) return;
+
+		this.current = null;
         while(this.haveNext()) {
             System.out.print(this.current.getValue().toString() + " -> ");
         }
 		System.out.println();
     }
 
-    public ListDupl<String> getListWithCommonNames(ListDupl<String> list) {
+    public ListDupl<String> getListWithCommonWords(ListDupl<String> list) {
+		if(this.head == null) return new ListDupl<String>();
+
 		if(this.head.getValue() instanceof String) {
 			ListDupl<String> list03 = new ListDupl<String>();
 			while(this.haveNext()) {
@@ -59,7 +92,7 @@ public class ListDupl<T> {
 			}
 			return list03;
 		}
-        return null;
+        return new ListDupl<String>();
     }
 	
 	public boolean haveNext() {
@@ -89,11 +122,21 @@ public class ListDupl<T> {
 	}
 	
 	public void removeLeft() {
-		
+		if(this.end == null) return;
+
+		this.current = this.end.getPrev();
+		this.end.setPrev(null);
+		this.current.setNext(null);
+		this.end = this.current;
 	}
 
 	public void removeRight() {
-		
+		if(this.head == null) return;
+
+		this.current = this.head.getNext();
+		this.head.setNext(null);
+		this.current.setPrev(null);
+		this.head = this.current;
 	}
 
     public boolean haveTextInList(String value) {
